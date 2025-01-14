@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/friendli_client-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/friendli_client-{{ version }}.tar.gz
   sha256: 682c53db8dfea411770a7b7993743a6606a966ad2cef6d444a45083fe34fac86
 
 build:
@@ -14,15 +14,15 @@ build:
     - friendli = friendli.cli:app
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.8,<4.0
+    - python {{ python_min }}
     - poetry-core >=1.6.1
     - pip
   run:
-    - python >=3.8.1,<4.0.0
+    - python >={{ python_min }},<4.0.0
     - requests >=2.0.0,<3.0.0
     - pyyaml >=6.0.1,<7.0.0
     - typer >=0.9.0,<0.10.0
@@ -55,6 +55,7 @@ test:
     - friendli --help
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://friendli.ai/
