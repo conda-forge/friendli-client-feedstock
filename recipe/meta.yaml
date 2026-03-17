@@ -1,5 +1,5 @@
 {% set name = "friendli-client" %}
-{% set version = "1.3.7" %}
+{% set version = "1.5.8" %}
 
 package:
   name: {{ name|lower }}
@@ -7,14 +7,14 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/friendli_client-{{ version }}.tar.gz
-  sha256: 682c53db8dfea411770a7b7993743a6606a966ad2cef6d444a45083fe34fac86
+  sha256: 9181506e81e7336bff66ffb6710201bc3acf88f741c970045b632bdb2853b5fa
 
 build:
   entry_points:
     - friendli = friendli.cli:app
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 1
+  number: 0
 
 requirements:
   host:
@@ -22,19 +22,22 @@ requirements:
     - poetry-core >=1.6.1
     - pip
   run:
+    - grpc-stubs >=1.53.0,<2.0.0
+    - grpcio >=1.64.1,<2.0.0
+    - grpcio-tools >=1.64.1,<2.0.0
     - python >={{ python_min }},<4.0.0
-    - requests >=2.0.0,<3.0.0
+    - requests >=2.32.0,<3.0.0
     - pyyaml >=6.0.1,<7.0.0
     - typer >=0.9.0,<0.10.0
     - rich >=12.2.0,<13.0.0
     - jsonschema >=4.17.3,<5.0.0
-    - tqdm >=4.48.0,<5.0.0
+    - tqdm >=4.66.3,<5.0.0
     - pydantic >=1.9.0,<3
     - injector >=0.21.0,<0.22.0
-    - protobuf >=4.24.2,<5.0.0
-    - types-protobuf >=4.24.0,<5.0.0
+    - protobuf >=5.26.1,<6.0.0
+    - types-protobuf >=5.26.0,<6.0.0
     - httpx >=0.24.1,<0.25.0
-    - fastapi >=0.104.0,<0.105.0
+    - fastapi >=0.115.2,<0.116.0
     - uvicorn >=0.23.2,<0.24.0
     - gql >=3.4.1,<4.0.0
     - packaging
